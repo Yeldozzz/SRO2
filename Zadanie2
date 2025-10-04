@@ -1,0 +1,78 @@
+interface Reportable {
+    void generateReport();
+}
+
+interface Trainable {
+    void attendTraining();
+}
+
+class Developer extends SRO2 implements Trainable {
+    String programmingLanguage;
+
+    Developer(String name, double salary, String programmingLanguage) {
+        super(name, salary);
+        this.programmingLanguage = programmingLanguage;
+    }
+
+    @Override
+    void work() {
+        System.out.println(name + " пишет код на " + programmingLanguage);
+    }
+
+    @Override
+    void introduce() {
+        System.out.println("Разработчик " + name + ", зарплата " + salary);
+    }
+
+    @Override
+    public void attendTraining() {
+        System.out.println(name + " проходит обучение по " + programmingLanguage);
+    }
+}
+
+class Manager extends Employee implements Reportable {
+    int teamSize;
+
+    Manager(String name, double salary, int teamSize) {
+        super(name, salary);
+        this.teamSize = teamSize;
+    }
+
+    @Override
+    void work() {
+        System.out.println(name + " управляет " + teamSize + " сотрудниками");
+    }
+
+    @Override
+    void introduce() {
+        System.out.println("Менеджер " + name + ", зарплата " + salary);
+    }
+
+    @Override
+    public void generateReport() {
+        System.out.println(name + " составляет отчет по команде");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee[] employees = {
+            new Developer("Али", 200000, "Java"),
+            new Manager("Айгерим", 300000, 5)
+        };
+
+        for (Employee e : employees) {
+            e.introduce();
+            e.work();
+
+            if (e instanceof Reportable) {
+                ((Reportable) e).generateReport();
+            }
+            if (e instanceof Trainable) {
+                ((Trainable) e).attendTraining();
+            }
+
+            System.out.println();
+        }
+    }
+}
