@@ -1,0 +1,65 @@
+abstract class SRO2 {
+    String name;
+    double salary;
+
+    Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    abstract void work();
+    abstract void introduce();
+}
+
+class Developer extends Employee {
+    String programmingLanguage;
+
+    Developer(String name, double salary, String programmingLanguage) {
+        super(name, salary);
+        this.programmingLanguage = programmingLanguage;
+    }
+
+    @Override
+    void work() {
+        System.out.println(name + " пишет код на " + programmingLanguage);
+    }
+
+    @Override
+    void introduce() {
+        System.out.println("Разработчик " + name + ", зарплата " + salary);
+    }
+}
+
+class Manager extends Employee {
+    int teamSize;
+
+    Manager(String name, double salary, int teamSize) {
+        super(name, salary);
+        this.teamSize = teamSize;
+    }
+
+    @Override
+    void work() {
+        System.out.println(name + " управляет " + teamSize + " сотрудниками");
+    }
+
+    @Override
+    void introduce() {
+        System.out.println("Менеджер " + name + ", зарплата " + salary);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee[] employees = {
+            new Developer("Али", 200000, "Java"),
+            new Manager("Айгерим", 300000, 5)
+        };
+
+        for (Employee e : employees) {
+            e.introduce();
+            e.work();
+            System.out.println();
+        }
+    }
+}
